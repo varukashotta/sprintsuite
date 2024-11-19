@@ -1,0 +1,17 @@
+<h1>Search Results</h1>
+
+<% if @products.any? %>
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <%= link_to product.name, product_path(product) %> 
+        (<%= link_to 'Edit', edit_product_path(product), class: 'link-edit' %>, 
+        <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'link-delete' %>)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products found for "<%= params[:keyword] %>".</p>
+<% end %>
+
+<%= link_to 'Back to Products', products_path, class: 'btn btn-back' %>

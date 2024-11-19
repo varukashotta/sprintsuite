@@ -1,0 +1,50 @@
+<h1 class="page-title">Products</h1>
+
+<div class="actions-container">
+  <%= link_to 'Create Product', new_product_path, class: 'btn btn-create' %>
+</div>
+
+<div class="forms-container">
+  <div class="search-container">
+    <h2>Search by keyword:</h2>
+    <%= form_with(url: search_products_path, method: :get, class: 'form-inline') do |form| %>
+      <%= form.text_field :keyword, placeholder: "Enter keyword", class: 'form-control' %>
+      <%= form.submit 'Search', class: 'btn btn-search' %>
+    <% end %>
+  </div>
+
+  <div class="filter-container">
+    <h2>Filter by date:</h2>
+    <%= form_with(url: filter_by_date_products_path, method: :get, class: 'form-inline') do |form| %>
+      <%= form.date_field :start_date, class: 'form-control' %>
+      <%= form.date_field :end_date, class: 'form-control' %>
+      <%= form.submit 'Filter by Date', class: 'btn btn-filter' %>
+    <% end %>
+  </div>
+</div>
+
+<% if controller.action_name == 'index' %>
+<div class="content-container">
+  <div class="top-categories-container">
+    <h2>Top 5 Categories</h2>
+    <ul>
+      <% @top_categories.each do |category| %>
+        <li><%= category.name %> - <%= category.products.count %> products</li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="products-list">
+    <h2>Products List</h2>
+    <ul>
+      <% @products.each do |product| %>
+        <li>
+          <%= link_to product.name, product_path(product) %> 
+          (<%= link_to 'Edit', edit_product_path(product), class: 'link-edit' %>, 
+          <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'link-delete' %>)
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
