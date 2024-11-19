@@ -72,4 +72,4 @@ gem "webpacker", "~> 5.4"
 
 gem "react_on_rails", "~> 14.0"
 
-gem "shakapacker", "= 8.0"
+gem "shakapacker", "8.0.2"
